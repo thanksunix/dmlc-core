@@ -2,6 +2,7 @@
 #include <dmlc/logging.h>
 #include <dmlc/common.h>
 #include <algorithm>
+#include <fstream>
 #include "./line_split.h"
 
 #if DMLC_USE_REGEX
@@ -102,6 +103,16 @@ std::vector<URI> InputSplitBase::ConvertToURIs(const std::string& uri) {
   // expand by match regex pattern.
   for (size_t i = 0; i < file_list.size(); ++i) {
     URI path(file_list[i].c_str());
+#if defined(__ASYLO__)
+    {
+      // TODO: Remove this when asylo add dir ops.
+      std::ifstream in(path.name);
+      if (in) {
+        expanded_list.push_back(path);
+        continue;
+      }
+    }
+#endif
     size_t pos = path.name.rfind('/');
     if (pos == std::string::npos || pos + 1 == path.name.length()) {
       expanded_list.push_back(path);

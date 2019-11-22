@@ -12,7 +12,7 @@
 #if DMLC_USE_FOPEN64 && \
   (!defined(__GNUC__) || (defined __ANDROID__) || (defined __FreeBSD__) \
   || (defined __APPLE__) || ((defined __MINGW32__) && !(defined __MINGW64__)) \
-  || (defined __CYGWIN__) )
+  || (defined __CYGWIN__) || (defined __ASYLO__) )
   #define DMLC_EMIT_FOPEN64_REDEFINE_WARNING
   #define fopen64 std::fopen
 #endif
@@ -22,6 +22,7 @@
      && !defined(__sun) && !defined(__SVR4)\
      && !(defined __MINGW64__) && !(defined __ANDROID__))\
      && !defined(__CYGWIN__) && !defined(__EMSCRIPTEN__)\
+     && !defined(__ASYLO__) \
      && !defined(__RISCV__)
   #define DMLC_LOG_STACK_TRACE 1
   #define DMLC_LOG_STACK_TRACE_SIZE 10

@@ -12,7 +12,7 @@
   // If compiled with CMake, use CMake's endian detection logic
   #define DMLC_LITTLE_ENDIAN DMLC_CMAKE_LITTLE_ENDIAN
 #else
-  #if defined(__APPLE__) || defined(_WIN32)
+  #if defined(__APPLE__) || defined(_WIN32) || defined(__ASYLO__)
     #define DMLC_LITTLE_ENDIAN 1
   #elif defined(__GLIBC__) || defined(__GNU_LIBRARY__) \
         || defined(__ANDROID__) || defined(__RISCV__)
